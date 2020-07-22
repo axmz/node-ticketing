@@ -17,14 +17,14 @@ build:
         manual:
           - src: 'src/**/*.ts'
             dest: .
-    # - image: stephengrider/client
-    #   context: client
-    #   docker:
-    #     dockerfile: Dockerfile
-    #   sync:
-    #     manual:
-    #       - src: '**/*.js'
-    #         dest: .
+    - image: axmz/client
+      context: client
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: '**/*.js'
+            dest: .
     # - image: stephengrider/tickets
     #   context: tickets
     #   docker:
