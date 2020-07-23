@@ -25,14 +25,14 @@ build:
         manual:
           - src: '**/*.js'
             dest: .
-    # - image: stephengrider/tickets
-    #   context: tickets
-    #   docker:
-    #     dockerfile: Dockerfile
-    #   sync:
-    #     manual:
-    #       - src: 'src/**/*.ts'
-    #         dest: .
+    - image: axmz/tickets
+      context: tickets
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.ts'
+            dest: .
     # - image: stephengrider/orders
     #   context: orders
     #   docker:
