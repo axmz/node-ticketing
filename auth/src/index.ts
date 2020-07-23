@@ -1,11 +1,12 @@
 import mongoose from 'mongoose'
-import {app} from './app'
+import { app } from './app'
 
 const start = async () => {
-    if(!process.env.JWT_KEY) {
-        throw new Error("JTW_KEY must be defined")
-    }
     try {
+        if (!process.env.JWT_KEY) {
+            throw new Error("JWT_KEY must be defined")
+        }
+
         await mongoose.connect(
 
             'mongodb://auth-mongo-srv:27017/auth',

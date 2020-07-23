@@ -2,8 +2,8 @@ import express from 'express'
 import 'express-async-errors'
 import { json } from 'body-parser'
 import { signUpRouter, signInRouter, signOutRouter, currentUserRouter } from './routes'
-import { errorHandler } from './middleware/error-handler'
-import { NotFoundError } from './errors/not-found-error'
+import { errorHandler } from '@axmztickets/common'
+import { NotFoundError } from '@axmztickets/common'
 import cookieSession from 'cookie-session'
 
 const app = express()
