@@ -28,7 +28,7 @@
     "ts-jest": "^26.1.3"
   },
   "scripts": {
-    "test": "jest --watchAll --no-cache",
+    "test": "jest --watchAll --no-cache --verbose",
     "start": "ts-node-dev --poll ./src/index.ts"
   },
   "jest": {
