@@ -1,6 +1,7 @@
 import request from 'supertest'
 import { app } from '../../app'
 import { Ticket } from '../../models/ticket'
+import {natsWrapper} from '../../nats-wrapper'
 
 it('has a route handler for /api/tickets', async () => {
     const response = await request(app).post('/api/tickets/').send({})
@@ -13,7 +14,7 @@ it("returns 401 when user is not authenticated", async () => {
 
 it("accepts only authenticated users", async () => {
     const response = await request(app).post('/api/tickets/').set('Cookie', global.signin()).send({
-        title: "valide title",
+        title: "valid title",
         price: 10
     }).expect(201)
 })
@@ -44,3 +45,18 @@ it("saves ticket data in db and returns it to the client", async () => {
     expect(tickets[0].title).toEqual(title)
     expect(tickets[0].price).toEqual(price)
 })
+
+it('publishes an event', async () => {
+  const title = 'asldkfj';
+
+  await request(app)
+    .post('/api/tickets')
+    .set('Cookie', global.signin())
+    .send({
+      title,
+      price: 20,
+    })
+    .expect(201);
+
+  expect(natsWrapper.client.publish).toHaveBeenCalled();
+});

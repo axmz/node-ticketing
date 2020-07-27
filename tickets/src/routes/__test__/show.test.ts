@@ -1,6 +1,5 @@
 import request from 'supertest'
 import { app } from '../../app'
-import { Ticket } from '../../models/ticket'
 import mongoose from 'mongoose'
 
 
@@ -21,7 +20,11 @@ it('returns the found ticket', async () => {
         })
         .expect(201);
 
-    const ticketResponse = await request(app).get(`/api/tickets/${response.body.id}`).send({}).expect(200)
+    const ticketResponse = await request(app)
+        .get(`/api/tickets/${response.body.id}`)
+        .send()
+        .expect(200)
+
 
     expect(ticketResponse.body.title).toEqual(title);
     expect(ticketResponse.body.price).toEqual(price);

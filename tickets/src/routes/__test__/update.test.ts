@@ -2,7 +2,7 @@ import request from 'supertest';
 import { app } from '../../app';
 import mongoose from 'mongoose';
 import { Ticket } from '../../models/ticket';
-// import { natsWrapper } from '../../nats-wrapper';
+import { natsWrapper } from '../../nats-wrapper';
 
 it('returns a 404 if the provided id does not exist', async () => {
   const id = new mongoose.Types.ObjectId().toHexString();
