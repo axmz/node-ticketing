@@ -25,7 +25,7 @@ router.post('/api/tickets', [
         price: ticket.price,
         title: ticket.title,
         userId: ticket.userId,
-        // version: 1
+        version: ticket.version
     })
 
     return res.status(201).send(ticket)
