@@ -79,5 +79,9 @@ it('returns a 201 with valid inputs', async () => {
     })
     .expect(201);
 
-  expect((stripe.charges.create as jest.Mock).mock.calls[0][0]).toEqual({ source: "tok_visa", amount: order.price * 100, currency: "usd" })
+  expect((stripe.charges.create as jest.Mock).mock.calls[0][0]).toEqual({
+    source: "tok_visa",
+    amount: order.price * 100,
+    currency: "usd"
+  })
 });

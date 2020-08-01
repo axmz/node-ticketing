@@ -13,9 +13,6 @@ import { Order } from '../models/order';
 import { PaymentCreatedPublisher } from '../events/publishers/payment-created-publisher';
 import { Payment } from '../models/payment';
 import { natsWrapper } from '../nats-wrapper';
-// import { Payment } from '../models/payment';
-// import { PaymentCreatedPublisher } from '../events/publishers/payment-created-publisher';
-// import { natsWrapper } from '../nats-wrapper';
 
 const router = express.Router();
 
@@ -44,12 +41,14 @@ router.post(
       amount: order.price * 100,
       source: token,
     });
+
     const payment = Payment.build({
       orderId,
-      stripeId: charge.id,
+      stripeId: charge.id, // mock returns a mock id
     });
     await payment.save();
-    new PaymentCreatedPublisher(natsWrapper.client).publish({
+
+    await new PaymentCreatedPublisher(natsWrapper.client).publish({
       id: payment.id,
       orderId: payment.orderId,
       stripeId: payment.stripeId,
