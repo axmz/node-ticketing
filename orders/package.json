@@ -30,6 +30,7 @@
   },
   "scripts": {
     "test": "jest --watchAll --no-cache --verbose",
+    "test:ci": "jest",
     "start": "ts-node-dev --poll ./src/index.ts"
   },
   "jest": {
