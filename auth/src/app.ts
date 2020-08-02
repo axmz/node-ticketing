@@ -23,4 +23,4 @@ app.all("*", async () => { throw new NotFoundError() })
 
 app.use(errorHandler)
 
-export {app}
+export { app }
