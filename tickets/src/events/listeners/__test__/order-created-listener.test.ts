@@ -13,7 +13,7 @@ const setup = async () => {
   const ticket = Ticket.build({
     title: 'concert',
     price: 99,
-    userId: mongoose.Types.ObjectId().toHexString()
+    userId: 'asdf',
   });
   await ticket.save();
 
@@ -22,8 +22,8 @@ const setup = async () => {
     id: mongoose.Types.ObjectId().toHexString(),
     version: 0,
     status: OrderStatus.Created,
-    userId: mongoose.Types.ObjectId().toHexString(),
-    expiresAt: 'datestring',
+    userId: 'alskdfj',
+    expiresAt: 'alskdjf',
     ticket: {
       id: ticket.id,
       price: ticket.price,
@@ -37,6 +37,20 @@ const setup = async () => {
 
   return { listener, ticket, data, msg };
 };
+
+it('publishes a ticket updated event', async () => {
+  const { listener, ticket, data, msg } = await setup();
+
+  await listener.onMessage(data, msg);
+
+  expect(natsWrapper.client.publish).toHaveBeenCalled();
+
+  const ticketUpdatedData = JSON.parse(
+    (natsWrapper.client.publish as jest.Mock).mock.calls[0][1]
+  );
+
+  expect(data.id).toEqual(ticketUpdatedData.orderId);
+});
 
 it('sets the userId of the ticket', async () => {
   const { listener, ticket, data, msg } = await setup();
@@ -53,19 +67,4 @@ it('acks the message', async () => {
   await listener.onMessage(data, msg);
 
   expect(msg.ack).toHaveBeenCalled();
-});
-
-it('publishes a ticket updated event', async () => {
-  const { listener, ticket, data, msg } = await setup();
-
-  await listener.onMessage(data, msg);
-
-  expect(natsWrapper.client.publish).toHaveBeenCalled();
-
-  const ticketUpdatedData = JSON.parse(
-    (natsWrapper.client.publish as jest.Mock).mock.calls[0][1]
-  );
-
-  console.log(data.id, ticketUpdatedData.orderId)
-  expect(data.id).toEqual(ticketUpdatedData.orderId);
 });
