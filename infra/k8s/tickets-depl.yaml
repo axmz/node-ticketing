@@ -14,7 +14,8 @@ spec:
     spec:
       containers:
         - name: tickets
-          image: axmz/tickets
+          # image: axmz/tickets
+          image: gcr.io/blissful-jet-287019/tickets
           env:
             - name: NATS_CLIENT_ID
               valueFrom:

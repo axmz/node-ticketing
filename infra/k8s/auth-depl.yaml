@@ -14,7 +14,8 @@ spec:
     spec:
       containers:
         - name: auth
-          image: axmz/auth
+          # image: axmz/auth
+          image: gcr.io/blissful-jet-287019/auth
           env:
             - name: MONGO_URI
               value: 'mongodb://auth-mongo-srv:27017/auth'

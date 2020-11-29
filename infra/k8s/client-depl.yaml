@@ -14,7 +14,8 @@ spec:
     spec:
       containers:
         - name: client
-          image: axmz/client
+          # image: axmz/client
+          image: gcr.io/blissful-jet-287019/client
 
 ---
 apiVersion: v1

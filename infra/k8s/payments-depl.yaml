@@ -14,7 +14,8 @@ spec:
     spec:
       containers:
         - name: payments
-          image: axmz/payments
+          # image: axmz/payments
+          image: gcr.io/blissful-jet-287019/payments
           env:
             - name: NATS_CLIENT_ID
               valueFrom:

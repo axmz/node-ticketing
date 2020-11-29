@@ -14,7 +14,8 @@ spec:
     spec:
       containers:
         - name: expiration
-          image: axmz/expiration
+          # image: axmz/expiration
+          image: gcr.io/blissful-jet-287019/expiration
           env:
             - name: NATS_CLIENT_ID
               valueFrom:

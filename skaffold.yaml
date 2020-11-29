@@ -6,10 +6,13 @@ deploy:
       - ./infra/k8s/*
       # - ./infra/k8s-dev/*
 build:
-  local:
-    push: false
+  # local:
+  #   push: false
+  googleCloudBuild:
+    projectId: blissful-jet-287019
   artifacts:
-    - image: axmz/auth
+    # - image: axmz/auth
+    - image: gcr.io/blissful-jet-287019/auth
       context: auth
       docker:
         dockerfile: Dockerfile
@@ -17,7 +20,8 @@ build:
         manual:
           - src: 'src/**/*.ts'
             dest: .
-    - image: axmz/client
+    # - image: axmz/client
+    - image: gcr.io/blissful-jet-287019/client
       context: client
       docker:
         dockerfile: Dockerfile
@@ -25,7 +29,8 @@ build:
         manual:
           - src: '**/*.js'
             dest: .
-    - image: axmz/tickets
+    # - image: axmz/tickets
+    - image: gcr.io/blissful-jet-287019/tickets
       context: tickets
       docker:
         dockerfile: Dockerfile
@@ -33,7 +38,8 @@ build:
         manual:
           - src: 'src/**/*.ts'
             dest: .
-    - image: axmz/orders
+    # - image: axmz/orders
+    - image: gcr.io/blissful-jet-287019/orders
       context: orders
       docker:
         dockerfile: Dockerfile
@@ -41,7 +47,8 @@ build:
         manual:
           - src: 'src/**/*.ts'
             dest: .
-    - image: axmz/expiration
+    # - image: axmz/expiration
+    - image: gcr.io/blissful-jet-287019/expiration
       context: expiration
       docker:
         dockerfile: Dockerfile
@@ -49,7 +56,8 @@ build:
         manual:
           - src: 'src/**/*.ts'
             dest: .
-    - image: axmz/payments
+    # - image: axmz/payments
+    - image: gcr.io/blissful-jet-287019/payments
       context: payments
       docker:
         dockerfile: Dockerfile

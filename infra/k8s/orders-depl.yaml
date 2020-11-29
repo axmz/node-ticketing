@@ -14,7 +14,8 @@ spec:
     spec:
       containers:
         - name: orders
-          image: axmz/orders
+          # image: axmz/orders
+          image: gcr.io/blissful-jet-287019/orders
           env:
             - name: NATS_CLIENT_ID
               valueFrom:
